@@ -69,6 +69,15 @@ public class Main : MonoBehaviour {
         Globals.ort3 = Tools.RotateVector1AroundVector2(Globals.ort3, Vector3.right, angle);
             
         Globals.status = EAppStatus.running;
+
+
+        Globals.applyGravity = true ;
+        Globals.muscleSimulate = true;
+        Globals.neuronSimulate = true;
+        Globals.neuron_active = true;
+
+
+
     }
 
     void Update()

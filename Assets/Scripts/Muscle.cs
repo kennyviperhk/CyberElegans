@@ -9,13 +9,6 @@ public class Muscle : Synapse
     public float length;
     public Color color;
 
-    public GameObject plane = GameObject.Find("plane");
-    public GameObject plane2 = GameObject.Find("plane2");
-    public GameObject plane3 = GameObject.Find("plane3");
-    public GameObject plane4 = GameObject.Find("plane4");
-    public GameObject plane5 = GameObject.Find("plane5");
-    public GameObject plane6 = GameObject.Find("plane6");
-
 
 
     public Muscle(float strength, CMassPoint p1, CMassPoint p2, string name) : base(1.0f, name, new Vector3(0, 0, 0))
@@ -46,12 +39,6 @@ public class Muscle : Synapse
         render.Draw(rp1, rp2);
 
         
-    }
-
-    public void Genpng()
-    {
-     //   plane.transform.position = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-   //     Debug.Log("Gen");
     }
 
     public Vector3 getPos()

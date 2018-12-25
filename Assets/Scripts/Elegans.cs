@@ -27,26 +27,14 @@ class Elegans
     public GameObject plane4 = GameObject.Find("Plane4");
     public GameObject plane5 = GameObject.Find("Plane5");
     public GameObject plane6 = GameObject.Find("Plane6");
-
-
-
-    /*
-    public GameObject plane2 = GameObject.CreatePrimitive(PrimitiveType.Plane);
-   public GameObject plane3 = GameObject.CreatePrimitive(PrimitiveType.Plane);
-    public GameObject plane4 = GameObject.CreatePrimitive(PrimitiveType.Plane);
-    public GameObject plane5 = GameObject.CreatePrimitive(PrimitiveType.Plane);
-    public GameObject plane6 = GameObject.CreatePrimitive(PrimitiveType.Plane);
-    */
-
-
     //
-    public GameObject hand = GameObject.Find("worm");
-    public Transform ammo;
-    public Transform ammo2;
-    public Transform ammo3;
-    public Transform ammo4;
-    public Transform ammo5;
-    public Transform ammo6;
+    public GameObject worm = GameObject.Find("worm");
+    public Transform attachingPos;
+    public Transform attachingPos2;
+    public Transform attachingPos3;
+    public Transform attachingPos4;
+    public Transform attachingPos5;
+    public Transform attachingPos6;
 
 
 
@@ -404,7 +392,7 @@ class Elegans
         KeysMan.AddKeyEvent(KeyCode.Keypad0, savePosition);
 
        // planetransform();
-        applyimages();
+
     }
 
    /* void planetransform()
@@ -453,13 +441,6 @@ class Elegans
         plane6.transform.localScale += new Vector3(1.8f, 1.8f, 1.8f);
     } */
 
-    public void applyimages() {
-
-
-        /*Renderer rend = plane.GetComponent<Renderer>();
-        plane.material.SetFloat("_Cutoff", 0.8f);*/
-    }
- 
 
     public bool LoadNeuronPosition() {
         string file = Globals.NeuronPosFile;
@@ -711,89 +692,8 @@ class Elegans
             mMuscle[i].checkActivity();
         }
 
-
-
-        //////////////////////////////////////////////////////////////////////////////////////////////
-        //  hand = this.transform.Find("worm").gameObject;
-
-        //If the child was found.
-        if (hand != null)
-        {
-            //Find the child named "ammo" of the gameobject "magazine" (magazine is a child of "gun").
-            ammo = hand.transform.Find("muscle/muscle 0");
-            ammo2 = hand.transform.Find("muscle/muscle 175");
-            ammo3 = hand.transform.Find("muscle/muscle 181");
-            ammo4 = hand.transform.Find("muscle/muscle 18");
-            ammo5 = hand.transform.Find("muscle/muscle 21");
-            ammo6 = hand.transform.Find("muscle/muscle 25");
-
-
-            // Debug.Log(ammo.transform.position);
-
-            //plane1
-            plane.transform.position = ammo.transform.position + new Vector3(0.0f, 0.0f, 1.5f);
-            plane.transform.rotation = ammo.transform.rotation ;
-            Color32 objColor;
-            objColor = ammo.GetComponent<MeshRenderer>().material.color;
-            //Debug.Log(objColor.r);
-            Renderer rend = plane.GetComponent<Renderer>();
-            rend.material.SetFloat("_Cutoff", 0.0055f* objColor.r);
-
-            //plane2
-            plane2.transform.position = ammo2.transform.position + new Vector3(0.0f, 0.0f, 1.1f);
-            plane2.transform.rotation = ammo2.transform.rotation;
-
-            Color32 objColor2;
-            objColor2 = ammo2.GetComponent<MeshRenderer>().material.color;
-            //Debug.Log(objColor.r);
-       
-            Renderer rend2 = plane2.GetComponent<Renderer>();
-            rend2.material.SetFloat("_Cutoff", 0.0055f * objColor2.r);
-
-            //plane3
-            plane3.transform.position = ammo3.transform.position + new Vector3(0.0f, 0.0f, 4.4f);
-            plane3.transform.rotation = ammo3.transform.rotation;
-
-            Color32 objColor3;
-            objColor3 = ammo3.GetComponent<MeshRenderer>().material.color;
+        applyImages();
       
-
-            Renderer rend3 = plane3.GetComponent<Renderer>();
-            rend3.material.SetFloat("_Cutoff", 0.0055f * objColor3.r);
-
-            //plane4
-            plane4.transform.position = ammo4.transform.position + new Vector3(0.0f, 0.0f, 3.8f);
-            plane4.transform.rotation = ammo4.transform.rotation;
-            Color32 objColor4;
-            objColor4 = ammo4.GetComponent<MeshRenderer>().material.color;
-            Renderer rend4 = plane4.GetComponent<Renderer>();
-            rend4.material.SetFloat("_Cutoff", 0.0055f * objColor4.r);
-
-            //plane5
-            plane5.transform.position = ammo5.transform.position + new Vector3(0.0f, 0.0f, 3.8f);
-            plane5.transform.rotation = ammo5.transform.rotation;
-            Color32 objColor5;
-            objColor5 = ammo5.GetComponent<MeshRenderer>().material.color;
-            Renderer rend5 = plane5.GetComponent<Renderer>();
-            rend5.material.SetFloat("_Cutoff", 0.0055f * objColor5.r);
-
-            //plane6
-            plane6.transform.position = ammo6.transform.position + new Vector3(0.0f, 0.0f, 1.5f);
-            plane6.transform.rotation = ammo6.transform.rotation;
-            Color32 objColor6;
-            objColor6 = ammo6.GetComponent<MeshRenderer>().material.color;
-            Renderer rend6 = plane6.GetComponent<Renderer>();
-            rend6.material.SetFloat("_Cutoff", 0.0055f * objColor6.r);
-
-
-        }
-        else Debug.Log("No child with the name 'Gun' attached to the player");
-      //  Debug.Log(hand.transform.position); 
-        //set activity - 0||1 depending on income and thresold 
-        
-         
-        
-
         for (int i = 0; i < mNeuron.Count; ++i) {
             mNeuron[i].UpdateLogic();
         }
@@ -1294,5 +1194,75 @@ class Elegans
             return null;
         }
 	    return null;
+    }
+
+    public void applyImages() {
+        //If the child was found.
+        if (worm != null)
+        {
+            //Find the child named "attachingPos" of the gameobject "magazine" (magazine is a child of "gun").
+            attachingPos = worm.transform.Find("muscle/muscle 0");
+            attachingPos2 = worm.transform.Find("muscle/muscle 175");
+            attachingPos3 = worm.transform.Find("muscle/muscle 181");
+            attachingPos4 = worm.transform.Find("muscle/muscle 18");
+            attachingPos5 = worm.transform.Find("muscle/muscle 21");
+            attachingPos6 = worm.transform.Find("muscle/muscle 25");
+
+       
+            float changeRate = Time.time/500;
+            float changeFactor = Time.time / 3.0f;
+        //    Debug.Log(changeRate);
+         //   Debug.Log("Rate" + Mathf.Cos(changeRate + changeFactor * 5));
+
+            //plane1
+            plane.transform.position = attachingPos.transform.position + new Vector3(0.0f, 0.0f, 1.5f);
+            plane.transform.rotation = attachingPos.transform.rotation;
+           // Color32 objColor;
+          //  objColor = attachingPos.GetComponent<MeshRenderer>().material.color;
+            //Debug.Log(objColor.r);
+            Renderer rend = plane.GetComponent<Renderer>();
+            rend.material.color = new Color(0, 0, 0, Math.Abs(Mathf.Cos(changeRate + changeFactor * 5)));
+
+            //plane2
+            plane2.transform.position = attachingPos2.transform.position + new Vector3(0.0f, 0.0f, 1.1f);
+            plane2.transform.rotation = attachingPos2.transform.rotation;
+
+            Renderer rend2 = plane2.GetComponent<Renderer>();
+            rend2.material.color = new Color(0, 0, 0, Math.Abs(Mathf.Cos(changeRate + changeFactor * 4)));
+
+            //plane3
+            plane3.transform.position = attachingPos3.transform.position + new Vector3(0.0f, 0.0f, 4.4f);
+            plane3.transform.rotation = attachingPos3.transform.rotation;
+            Renderer rend3 = plane3.GetComponent<Renderer>();
+            rend3.material.color = new Color(0, 0, 0, Math.Abs(Mathf.Cos(changeRate + changeFactor * 3)));
+
+            //plane4
+            plane4.transform.position = attachingPos4.transform.position + new Vector3(0.0f, 0.0f, 3.8f);
+            plane4.transform.rotation = attachingPos4.transform.rotation;
+            Renderer rend4 = plane4.GetComponent<Renderer>();
+            rend4.material.color = new Color(0, 0, 0, Math.Abs(Mathf.Cos(changeRate + changeFactor * 2)));
+
+            //plane5
+            plane5.transform.position = attachingPos5.transform.position + new Vector3(0.0f, 0.0f, 3.8f);
+            plane5.transform.rotation = attachingPos5.transform.rotation;
+            Renderer rend5 = plane5.GetComponent<Renderer>();
+            rend5.material.color = new Color(0, 0, 0, Math.Abs(Mathf.Cos(changeRate +changeFactor  * 1)));
+
+            //plane6
+            plane6.transform.position = attachingPos6.transform.position + new Vector3(0.0f, 0.0f, 1.5f);
+            plane6.transform.rotation = attachingPos6.transform.rotation;
+            Renderer rend6 = plane6.GetComponent<Renderer>();
+          //  remapped = remap(objColor6.r, 0, 255, 0, 1);
+          //  rend6.material.SetFloat("_Cutoff", remapped);
+            rend6.material.color = new Color(0, 0, 0, Math.Abs(Mathf.Cos(changeRate)));
+
+        }
+        else Debug.Log("No child with the name 'Gun' attached to the player");
+
+    }
+
+    public float remap( float value, float from1, float to1, float from2, float to2)
+    {
+        return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
     }
 }   // end of Elegans
