@@ -1211,11 +1211,17 @@ class Elegans
        
             float changeRate = Time.time/500;
             float changeFactor = Time.time / 3.0f;
-        //    Debug.Log(changeRate);
-         //   Debug.Log("Rate" + Mathf.Cos(changeRate + changeFactor * 5));
+
+            float smoothSpeed = 0.125f;
+
+            //    Debug.Log(changeRate);
+            //   Debug.Log("Rate" + Mathf.Cos(changeRate + changeFactor * 5));
 
             //plane1
-            plane.transform.position = attachingPos.transform.position + new Vector3(0.0f, 0.0f, 1.5f);
+          //  plane.transform.position = attachingPos.transform.position + new Vector3(0.0f, 0.0f, 1.5f);
+            Vector3 desiredPosition =  attachingPos.transform.position + new Vector3(0.0f, 0.0f, 1.5f);
+            Vector3 smoothedPosition = Vector3.Lerp(plane.transform.position, desiredPosition, smoothSpeed);
+            plane.transform.position = smoothedPosition;
             plane.transform.rotation = attachingPos.transform.rotation;
            // Color32 objColor;
           //  objColor = attachingPos.GetComponent<MeshRenderer>().material.color;
@@ -1224,37 +1230,52 @@ class Elegans
             rend.material.color = new Color(0, 0, 0, Math.Abs(Mathf.Cos(changeRate + changeFactor * 5)));
 
             //plane2
-            plane2.transform.position = attachingPos2.transform.position + new Vector3(0.0f, 0.0f, 1.1f);
+            // plane2.transform.position = attachingPos2.transform.position + new Vector3(0.0f, 0.0f, 3.5f);
+             desiredPosition = attachingPos2.transform.position + new Vector3(0.0f, 0.0f, 3.5f);
+             smoothedPosition = Vector3.Lerp(plane2.transform.position, desiredPosition, smoothSpeed);
+            plane2.transform.position = smoothedPosition;
             plane2.transform.rotation = attachingPos2.transform.rotation;
 
             Renderer rend2 = plane2.GetComponent<Renderer>();
             rend2.material.color = new Color(0, 0, 0, Math.Abs(Mathf.Cos(changeRate + changeFactor * 4)));
 
             //plane3
-            plane3.transform.position = attachingPos3.transform.position + new Vector3(0.0f, 0.0f, 4.4f);
+            //plane3.transform.position = attachingPos3.transform.position + new Vector3(0.0f, 0.0f, 4.4f);
+            desiredPosition = attachingPos3.transform.position + new Vector3(0.0f, 0.0f, 4.4f);
+             smoothedPosition = Vector3.Lerp(plane3.transform.position, desiredPosition, smoothSpeed);
+            plane3.transform.position = smoothedPosition;
             plane3.transform.rotation = attachingPos3.transform.rotation;
             Renderer rend3 = plane3.GetComponent<Renderer>();
             rend3.material.color = new Color(0, 0, 0, Math.Abs(Mathf.Cos(changeRate + changeFactor * 3)));
 
             //plane4
-            plane4.transform.position = attachingPos4.transform.position + new Vector3(0.0f, 0.0f, 3.8f);
+            //  plane4.transform.position = attachingPos4.transform.position + new Vector3(0.0f, 0.0f,5.0f);
+            desiredPosition = attachingPos4.transform.position + new Vector3(0.0f, 0.0f, 5.0f);
+            smoothedPosition = Vector3.Lerp(plane4.transform.position, desiredPosition, smoothSpeed);
+            plane4.transform.position = smoothedPosition;
             plane4.transform.rotation = attachingPos4.transform.rotation;
             Renderer rend4 = plane4.GetComponent<Renderer>();
             rend4.material.color = new Color(0, 0, 0, Math.Abs(Mathf.Cos(changeRate + changeFactor * 2)));
 
             //plane5
-            plane5.transform.position = attachingPos5.transform.position + new Vector3(0.0f, 0.0f, 3.8f);
+            // plane5.transform.position = attachingPos5.transform.position + new Vector3(0.0f, 0.0f, 5.0f);
+            desiredPosition = attachingPos5.transform.position + new Vector3(0.0f, 0.0f, 5.0f);
+            smoothedPosition = Vector3.Lerp(plane5.transform.position, desiredPosition, smoothSpeed);
+            plane5.transform.position = smoothedPosition;
             plane5.transform.rotation = attachingPos5.transform.rotation;
             Renderer rend5 = plane5.GetComponent<Renderer>();
             rend5.material.color = new Color(0, 0, 0, Math.Abs(Mathf.Cos(changeRate +changeFactor  * 1)));
 
             //plane6
-            plane6.transform.position = attachingPos6.transform.position + new Vector3(0.0f, 0.0f, 1.5f);
+            // plane6.transform.position = attachingPos6.transform.position + new Vector3(4.0f,0.0f,0f);
+            desiredPosition = attachingPos6.transform.position + new Vector3(4.0f, 0.0f, 0.0f);
+            smoothedPosition = Vector3.Lerp(plane6.transform.position, desiredPosition, smoothSpeed);
+            plane6.transform.position = smoothedPosition;
             plane6.transform.rotation = attachingPos6.transform.rotation;
             Renderer rend6 = plane6.GetComponent<Renderer>();
-          //  remapped = remap(objColor6.r, 0, 255, 0, 1);
-          //  rend6.material.SetFloat("_Cutoff", remapped);
-            rend6.material.color = new Color(0, 0, 0, Math.Abs(Mathf.Cos(changeRate)));
+            //  remapped = remap(objColor6.r, 0, 255, 0, 1);
+            //  rend6.material.SetFloat("_Cutoff", remapped);
+            rend6.material.color = new Color(0, 0, 0, Math.Abs(Mathf.Cos(changeRate + changeFactor * 0.2f)));
 
         }
         else Debug.Log("No child with the name 'Gun' attached to the player");
